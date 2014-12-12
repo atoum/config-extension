@@ -13,10 +13,9 @@ class extension implements ExtensionInterface
     protected $script;
     protected $container;
 
-    public function __construct(atoum\scripts\runner $script, ContainerBuilder $container)
+    public function __construct(atoum\scripts\runner $script)
     {
         $this->script = $script;
-        $this->container = $container;
     }
 
     public function load(array $configs, ContainerBuilder $container)

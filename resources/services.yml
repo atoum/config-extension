@@ -15,7 +15,7 @@ parameters:
 
 services:
     field.coverage.html:
-        class: \mageekguy\atoum\report\fields\runner\coverage\html
+        class: mageekguy\atoum\report\fields\runner\coverage\html
         arguments:
             - %project.name%
             - %coverage.html.directory%
@@ -23,28 +23,28 @@ services:
             - [setRootUrl, [%coverage.html.directory%/index.html]]
 
     field.logo:
-        class: \mageekguy\atoum\report\fields\runner\atoum\logo
+        class: mageekguy\atoum\report\fields\runner\atoum\logo
 
     field.logo.result:
-        class: \mageekguy\atoum\report\fields\runner\result\logo
+        class: mageekguy\atoum\report\fields\runner\result\logo
 
     report.coverage.clover:
-        class: \mageekguy\atoum\reports\asynchronous\clover
+        class: mageekguy\atoum\reports\asynchronous\clover
         calls:
             - [addWriter, [@writer.clover]]
 
     report.xunit:
-        class: \mageekguy\atoum\reports\asynchronous\xunit
+        class: mageekguy\atoum\reports\asynchronous\xunit
         calls:
             - [addWriter, [@writer.xunit]]
 
     report.vim:
-        class: \mageekguy\atoum\reports\asynchronous\vim
+        class: mageekguy\atoum\reports\asynchronous\vim
         calls:
             - [addWriter, [@writer.stdout]]
 
     writer.mailer:
-        class: \mageekguy\atoum\mailers\mail
+        class: mageekguy\atoum\mailers\mail
         calls:
             - [addTo, [%mailer.to%]]
             - [setFrom, [%mailer.from%]]
@@ -53,14 +53,14 @@ services:
             - [setContentType, [%mailer.content_type%, %mailer.content_encoding%]]
 
     writer.stdout:
-        class: \mageekguy\atoum\writers\std\out
+        class: mageekguy\atoum\writers\std\out
 
     writer.clover:
-        class: \mageekguy\atoum\writers\file
+        class: mageekguy\atoum\writers\file
         arguments:
             - %coverage.clover.filename%
 
     writer.xunit:
-        class: \mageekguy\atoum\writers\file
+        class: mageekguy\atoum\writers\file
         arguments:
             - %xunit.filename%
