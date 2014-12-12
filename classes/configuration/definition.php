@@ -31,6 +31,12 @@ class definition implements ConfigurationInterface
                             ->prototype('scalar')->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('writers')
+                    ->prototype('array')
+                            ->prototype('scalar')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

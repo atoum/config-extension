@@ -1,17 +1,26 @@
 parameters:
     project.name: atoum
 
-    coverage.directory: ./coverage
+    coverage.html.directory: ./coverage
     coverage.clover.filename: clover.xml
 
+    xunit.filename: xunit.xml
+
+    mailer.to: ~
+    mailer.from: ~
+    mailer.xmailer: ~
+    mailer.reply_to: ~
+    mailer.content_type: text/plain
+    mailer.content_encoding: utf-8
+
 services:
-    field.coverage:
+    field.coverage.html:
         class: \mageekguy\atoum\report\fields\runner\coverage\html
         arguments:
             - %project.name%
-            - %coverage.directory%
+            - %coverage.html.directory%
         calls:
-            - [setRootUrl, [%coverage.directory%/index.html]]
+            - [setRootUrl, [%coverage.html.directory%/index.html]]
 
     field.logo:
         class: \mageekguy\atoum\report\fields\runner\atoum\logo
@@ -19,12 +28,39 @@ services:
     field.logo.result:
         class: \mageekguy\atoum\report\fields\runner\result\logo
 
-    report.clover.writer:
+    report.coverage.clover:
+        class: \mageekguy\atoum\reports\asynchronous\clover
+        calls:
+            - [addWriter, [@writer.clover]]
+
+    report.xunit:
+        class: \mageekguy\atoum\reports\asynchronous\xunit
+        calls:
+            - [addWriter, [@writer.xunit]]
+
+    report.vim:
+        class: \mageekguy\atoum\reports\asynchronous\vim
+        calls:
+            - [addWriter, [@writer.stdout]]
+
+    writer.mailer:
+        class: \mageekguy\atoum\mailers\mail
+        calls:
+            - [addTo, [%mailer.to%]]
+            - [setFrom, [%mailer.from%]]
+            - [setXMailer, [%mailer.xmailer%]]
+            - [setReplyTo, [%mailer.reply_to%]]
+            - [setContentType, [%mailer.content_type%, %mailer.content_encoding%]]
+
+    writer.stdout:
+        class: \mageekguy\atoum\writers\std\out
+
+    writer.clover:
         class: \mageekguy\atoum\writers\file
         arguments:
             - %coverage.clover.filename%
 
-    report.clover:
-        class: \mageekguy\atoum\reports\asynchronous\clover
-        calls:
-            - [addWriter, [@report.clover.writer]]
+    writer.xunit:
+        class: \mageekguy\atoum\writers\file
+        arguments:
+            - %xunit.filename%
