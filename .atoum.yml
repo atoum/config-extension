@@ -1,0 +1,12 @@
+atoum:
+    directories:
+        - ./tests/units/classes
+
+    fields:
+        default:
+            - field.logo
+            - field.logo.result
+            - field.coverage
+
+    reports:
+        - report.clover

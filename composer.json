@@ -1,0 +1,26 @@
+{
+    "name": "atoum/config-extension",
+    "type": "library",
+    "description": "atoum extension to use Yaml configuration files",
+    "keywords": ["TDD","atoum","test","unit testing"],
+    "homepage": "http://www.atoum.org",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "jubianchi",
+            "email": "contact@jubianchi.fr"
+        }
+    ],
+    "require-dev": {
+        "atoum/atoum": "~1.0",
+        "symfony/yaml": "~2.6",
+        "symfony/config": "~2.6",
+        "symfony/dependency-injection": "~2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "mageekguy\\atoum\\config\\": "classes"
+        },
+        "files": ["autoloader.php"]
+    }
+}

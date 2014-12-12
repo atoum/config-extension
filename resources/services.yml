@@ -1,0 +1,30 @@
+parameters:
+    project.name: atoum
+
+    coverage.directory: ./coverage
+    coverage.clover.filename: clover.xml
+
+services:
+    field.coverage:
+        class: \mageekguy\atoum\report\fields\runner\coverage\html
+        arguments:
+            - %project.name%
+            - %coverage.directory%
+        calls:
+            - [setRootUrl, [%coverage.directory%/index.html]]
+
+    field.logo:
+        class: \mageekguy\atoum\report\fields\runner\atoum\logo
+
+    field.logo.result:
+        class: \mageekguy\atoum\report\fields\runner\result\logo
+
+    report.clover.writer:
+        class: \mageekguy\atoum\writers\file
+        arguments:
+            - %coverage.clover.filename%
+
+    report.clover:
+        class: \mageekguy\atoum\reports\asynchronous\clover
+        calls:
+            - [addWriter, [@report.clover.writer]]
