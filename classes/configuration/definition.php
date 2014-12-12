@@ -14,6 +14,10 @@ class definition implements ConfigurationInterface
 
         $root
             ->children()
+                ->booleanNode('loop')->end()
+                ->booleanNode('debug')->end()
+                ->integerNode('verbosity')->end()
+
                 ->arrayNode('directories')
                     ->prototype('scalar')->end()
                 ->end()

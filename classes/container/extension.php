@@ -27,6 +27,28 @@ class extension implements ExtensionInterface
         $container->setParameter('atoum.reports', $configs['reports']);
         $container->setParameter('atoum.fields', $configs['fields']);
         $container->setParameter('atoum.directories', $configs['directories']);
+
+        if (isset($configs['loop']) && $configs['loop'] === true)
+        {
+            $this->script->enableLoopMode();
+        }
+
+        if (isset($configs['debug']) && $configs['debug'] === true)
+        {
+            $this->script->enableDebugMode();
+        }
+
+        if (isset($configs['verbosity']))
+        {
+            $verbosity = (int) $configs['verbosity'];
+
+            while ($verbosity > 0)
+            {
+                $this->script->increaseVerbosityLevel();
+
+                $verbosity--;
+            }
+        }
     }
 
     public function getAlias()
