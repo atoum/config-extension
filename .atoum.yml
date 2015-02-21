@@ -1,26 +1,12 @@
-parameters:
-    mailer.from: team@atoum.org
-    mailer.to: team@atoum.org
-    mailer.reply_to: team@atoum.org
-    mailer.xmailer: atoum
-
 atoum:
-    loop: true
-    verbosity: 3
-
     directories:
         - ./tests/units/classes
+
+    reports:
+        - default
+        - report.xunit
+        - report.coverage.clover
 
     fields:
         default:
             - field.logo
-            - field.logo.result
-            - field.coverage.html
-
-    writers:
-        default:
-            - writer.mailer
-
-    reports:
-        - report.coverage.clover
-        - report.xunit

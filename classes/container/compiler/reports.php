@@ -11,14 +11,35 @@ class reports extends atoum\config\container\compiler
     {
         if ($container->hasParameter('atoum.reports') === false)
         {
+            if ($this->script->getRunner()->hasReports() === false)
+            {
+                $this->script->addDefaultReport();
+            }
+
             return;
         }
+
+        $this->script->getRunner()->removeReports();
 
         $reports = $container->getParameter('atoum.reports');
 
         foreach ($reports as $report)
         {
-            $this->script->addReport($container->get($report));
+            if ($this->script->getRunner()->hasReports())
+            {
+                $this->script->addReport($container->get($report));
+            }
+            else
+            {
+                if ($report === 'default')
+                {
+                    $this->script->addDefaultReport();
+                }
+                else
+                {
+                    $this->script->setReport($container->get($report));
+                }
+            }
         }
     }
-} 
+}

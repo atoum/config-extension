@@ -43,6 +43,21 @@ services:
         calls:
             - [addWriter, [@writer.stdout]]
 
+    report.nyancat:
+        class: mageekguy\atoum\reports\realtime\nyancat
+        calls:
+            - [addWriter, [@writer.stdout]]
+
+    report.santa:
+        class: mageekguy\atoum\reports\realtime\santa
+        calls:
+            - [addWriter, [@writer.stdout]]
+
+    report.tap:
+        class: mageekguy\atoum\reports\realtime\tap
+        calls:
+            - [addWriter, [@writer.stdout]]
+
     writer.mailer:
         class: mageekguy\atoum\mailers\mail
         calls:

@@ -14,13 +14,20 @@ class writers extends atoum\config\container\compiler
             return;
         }
 
-        $reports = $container->getParameter('atoum.writers');
+        $reportsWriters = $container->getParameter('atoum.writers');
 
-        foreach ($reports as $report => $writers)
+        if ($this->script->getRunner()->hasReports() === false)
+        {
+            $report = $this->script->addDefaultReport();
+        }
+
+        $reports = $this->script->getReports();
+
+        foreach ($reportsWriters as $report => $writers)
         {
             if ($report === 'default')
             {
-                $report = $this->script->addDefaultReport();
+                $report = $reports[0];
             }
             else
             {
@@ -33,4 +40,4 @@ class writers extends atoum\config\container\compiler
             }
         }
     }
-} 
+}

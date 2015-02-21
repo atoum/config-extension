@@ -14,13 +14,20 @@ class fields extends atoum\config\container\compiler
             return;
         }
 
-        $reports = $container->getParameter('atoum.fields');
+        $reportsFields = $container->getParameter('atoum.fields');
 
-        foreach ($reports as $report => $fields)
+        if ($this->script->getRunner()->hasReports() === false)
+        {
+            $report = $this->script->addDefaultReport();
+        }
+
+        $reports = $this->script->getReports();
+
+        foreach ($reportsFields as $report => $fields)
         {
             if ($report === 'default')
             {
-                $report = $this->script->addDefaultReport();
+                $report = $reports[0];
             }
             else
             {
@@ -33,4 +40,4 @@ class fields extends atoum\config\container\compiler
             }
         }
     }
-} 
+}
