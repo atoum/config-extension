@@ -26,8 +26,11 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 
 use mageekguy\atoum\config;
 
-$runner->addExtension(new config\extension(__DIR__ . '/.atoum.yml', $script));
+$runner->addExtension(new config\extension($script));
 
+// Or
+
+new config\extension($script);
 ```
 
 ## Use it
@@ -46,6 +49,7 @@ atoum:
             - field.coverage
 
     reports:
-        - report.clover
+        - default
+        - report.coverage.clover
 
 ```

@@ -22,6 +22,7 @@ class container
         $this->container
             ->addCompilerPass(new config\container\compiler\reports($script))
             ->addCompilerPass(new config\container\compiler\fields($script))
+            ->addCompilerPass(new config\container\compiler\writers($script))
             ->addCompilerPass(new config\container\compiler\directories($script))
         ;
 

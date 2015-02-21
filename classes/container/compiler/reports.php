@@ -25,18 +25,19 @@ class reports extends atoum\config\container\compiler
 
         foreach ($reports as $report)
         {
-            if ($this->script->getRunner()->hasReports())
+            if ($report === 'default')
             {
-                $this->script->addReport($container->get($report));
+                $this->script->addDefaultReport();
             }
             else
             {
-                if ($report === 'default')
+                if ($this->script->getRunner()->hasReports())
                 {
-                    $this->script->addDefaultReport();
+                    $this->script->addReport($container->get($report));
                 }
                 else
                 {
+
                     $this->script->setReport($container->get($report));
                 }
             }

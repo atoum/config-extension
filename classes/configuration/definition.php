@@ -14,16 +14,24 @@ class definition implements ConfigurationInterface
 
         $root
             ->children()
-                ->booleanNode('loop')->end()
-                ->booleanNode('debug')->end()
-                ->integerNode('verbosity')->end()
+                ->booleanNode('loop')
+                    ->defaultValue((bool) getenv('ATOUM_LOOP'))
+                ->end()
+                ->booleanNode('debug')
+                    ->defaultValue((bool) getenv('ATOUM_DEBUG'))
+                ->end()
+                ->integerNode('verbosity')
+                    ->defaultValue((int) getenv('ATOUM_VERBOSITY'))
+                ->end()
 
                 ->arrayNode('directories')
                     ->prototype('scalar')->end()
+                    ->defaultValue(array_filter(explode(',', getenv('ATOUM_DIRECTORIES'))))
                 ->end()
 
                 ->arrayNode('reports')
                     ->prototype('scalar')->end()
+                    ->defaultValue(array_filter(explode(',', getenv('ATOUM_REPORTS'))))
                 ->end()
 
                 ->arrayNode('fields')
@@ -42,4 +50,4 @@ class definition implements ConfigurationInterface
 
         return $tree;
     }
-} 
+}
