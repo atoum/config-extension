@@ -11,7 +11,7 @@
             "email": "contact@jubianchi.fr"
         }
     ],
-    "require-dev": {
+    "require": {
         "atoum/atoum": "<3.0",
         "symfony/yaml": "~2.6",
         "symfony/config": "~2.6",
