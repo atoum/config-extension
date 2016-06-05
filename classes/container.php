@@ -26,9 +26,14 @@ class container
             ->addCompilerPass(new config\container\compiler\directories($script))
         ;
 
-        $loader = new YamlFileLoader($this->container, new FileLocator(array(__DIR__ . '/../resources', getcwd())));
+        $loader = new YamlFileLoader($this->container, new FileLocator(array(__DIR__ . '/../resources')));
         $loader->load('services.yml');
-        $loader->load('.atoum.yml');
+
+        $configFile = getcwd() . DIRECTORY_SEPARATOR . '.atoum.yml';
+        if (is_file($configFile)) {
+            $loader = new YamlFileLoader($this->container, new FileLocator());
+            $loader->load($configFile);
+        }
 
         $this->container->compile();
     }
