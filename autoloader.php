@@ -19,3 +19,9 @@ atoum\autoloader::get()
 	->addDirectory('Symfony\Component\FileSystem', $vendorDirectory . '/symfony/filesystem/Symfony/Component/FileSystem')
 	->addDirectory('Symfony\Component\Yaml', $vendorDirectory . '/symfony/yaml/Symfony/Component/Yaml')
 ;
+
+if (defined('mageekguy\atoum\scripts\runner') === true) {
+	\mageekguy\atoum\scripts\runner::addConfigurationCallable(function($script, $runner) {
+		$runner->addExtension(new \mageekguy\atoum\config\extension($script));
+	});
+}
