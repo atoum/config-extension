@@ -5,6 +5,7 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
   - hhvm
   - hhvm-nightly
 
@@ -13,9 +14,13 @@ matrix:
     - php: hhvm
     - php: hhvm-nightly
 
-before_script:
-  - wget https://getcomposer.org/composer.phar
-  - php composer.phar install --prefer-source
+env:
+  matrix:
+    - COMPOSER_PREFER="--prefer-stable"
+    - COMPOSER_PREFER="--prefer-lowest"
+
+sudo: false
 
 script:
-  - vendor/bin/atoum --test-ext
+  - composer update $COMPOSER_PREFER
+  - ./vendor/bin/atoum
