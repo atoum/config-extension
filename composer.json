@@ -2,7 +2,7 @@
     "name": "atoum/config-extension",
     "type": "library",
     "description": "atoum extension to use Yaml configuration files",
-    "keywords": ["TDD","atoum","test","unit testing"],
+    "keywords": ["TDD","atoum","test","unit testing", "atoum-extension"],
     "homepage": "http://www.atoum.org",
     "license": "BSD",
     "authors": [
