@@ -31,32 +31,32 @@ services:
     report.coverage.clover:
         class: mageekguy\atoum\reports\asynchronous\clover
         calls:
-            - [addWriter, [@writer.clover]]
+            - [addWriter, ["@writer.clover"]]
 
     report.xunit:
         class: mageekguy\atoum\reports\asynchronous\xunit
         calls:
-            - [addWriter, [@writer.xunit]]
+            - [addWriter, ["@writer.xunit"]]
 
     report.vim:
         class: mageekguy\atoum\reports\asynchronous\vim
         calls:
-            - [addWriter, [@writer.stdout]]
+            - [addWriter, ["@writer.stdout"]]
 
     report.nyancat:
         class: mageekguy\atoum\reports\realtime\nyancat
         calls:
-            - [addWriter, [@writer.stdout]]
+            - [addWriter, ["@writer.stdout"]]
 
     report.santa:
         class: mageekguy\atoum\reports\realtime\santa
         calls:
-            - [addWriter, [@writer.stdout]]
+            - [addWriter, ["@writer.stdout"]]
 
     report.tap:
         class: mageekguy\atoum\reports\realtime\tap
         calls:
-            - [addWriter, [@writer.stdout]]
+            - [addWriter, ["@writer.stdout"]]
 
     writer.mailer:
         class: mageekguy\atoum\mailers\mail

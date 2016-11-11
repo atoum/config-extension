@@ -14,11 +14,26 @@ if (is_dir($vendorDirectory) === false)
 atoum\autoloader::get()
 	->addNamespaceAlias('atoum\config', __NAMESPACE__)
 	->addDirectory(__NAMESPACE__, __DIR__ . DIRECTORY_SEPARATOR . 'classes')
-	->addDirectory('Symfony\Component\Config', $vendorDirectory . '/symfony/config/Symfony/Component/Config')
-	->addDirectory('Symfony\Component\DependencyInjection', $vendorDirectory . '/symfony/dependency-injection/Symfony/Component/DependencyInjection')
-	->addDirectory('Symfony\Component\FileSystem', $vendorDirectory . '/symfony/filesystem/Symfony/Component/FileSystem')
-	->addDirectory('Symfony\Component\Yaml', $vendorDirectory . '/symfony/yaml/Symfony/Component/Yaml')
 ;
+
+
+
+$components = array(
+	'config' => 'Config',
+	'dependency-injection' => 'DependencyInjection',
+	'filesystem' => 'FileSystem',
+	'yaml' => 'Yaml',
+);
+
+foreach ($components as $componentKey => $componentName) {
+	$componentDir = $vendorDirectory . '/symfony/' . $componentKey . '/Symfony/Component/' . $componentName;
+	if (!is_dir($componentDir)) {
+		$componentDir = $vendorDirectory . '/symfony/' . $componentKey;
+	}
+	atoum\autoloader::get()
+		->addDirectory('Symfony\Component\\' . $componentName, $componentDir)
+	;
+}
 
 if (defined('mageekguy\atoum\scripts\runner') === true) {
 	\mageekguy\atoum\scripts\runner::addConfigurationCallable(function($script, $runner) {
