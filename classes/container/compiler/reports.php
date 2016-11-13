@@ -4,43 +4,24 @@ namespace mageekguy\atoum\config\container\compiler;
 
 use mageekguy\atoum;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 
 class reports extends atoum\config\container\compiler
 {
-    public function process(ContainerBuilder $container)
-    {
-        if ($container->hasParameter('atoum.reports') === false)
-        {
-            if ($this->script->getRunner()->hasReports() === false)
-            {
-                $this->script->addDefaultReport();
-            }
+	public function process(ContainerBuilder $container)
+	{
+		if ($container->hasParameter('atoum.reports') === false)
+		{
+			$container->setParameter('atoum.reports', array('report.default'));
+		}
 
-            return;
-        }
+		$this->script->getRunner()->removeReports();
 
-        $this->script->getRunner()->removeReports();
+		$reports = $container->getParameter('atoum.reports');
 
-        $reports = $container->getParameter('atoum.reports');
-
-        foreach ($reports as $report)
-        {
-            if ($report === 'default')
-            {
-                $this->script->addDefaultReport();
-            }
-            else
-            {
-                if ($this->script->getRunner()->hasReports())
-                {
-                    $this->script->addReport($container->get($report));
-                }
-                else
-                {
-
-                    $this->script->setReport($container->get($report));
-                }
-            }
-        }
-    }
+		foreach ($reports as $report)
+		{
+			$container->getDefinition('script')->addMethodCall('addReport', array($container->getDefinition($report)));
+		}
+	}
 }

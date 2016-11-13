@@ -7,13 +7,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class directories extends atoum\config\container\compiler
 {
-    public function process(ContainerBuilder $container)
-    {
-        if ($container->hasParameter('atoum.directories') === false)
-        {
-            return;
-        }
+	public function process(ContainerBuilder $container)
+	{
+		if ($container->hasParameter('atoum.directories') === false)
+		{
+			return;
+		}
 
-        $this->script->addTestsFromDirectories($container->getParameter('atoum.directories'));
-    }
+		$this->script->addTestsFromDirectories($container->getParameter('atoum.directories'));
+	}
 } 

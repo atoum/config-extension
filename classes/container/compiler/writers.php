@@ -7,37 +7,23 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class writers extends atoum\config\container\compiler
 {
-    public function process(ContainerBuilder $container)
-    {
-        if ($container->hasParameter('atoum.writers') === false)
-        {
-            return;
-        }
+	public function process(ContainerBuilder $container)
+	{
+		if ($container->hasParameter('atoum.writers') === false)
+		{
+			$container->setParameter('atoum.writers', array('report.default' => array('writer.stdout')));
+		}
 
-        $reportsWriters = $container->getParameter('atoum.writers');
+		$reportsWriters = $container->getParameter('atoum.writers');
 
-        if ($this->script->getRunner()->hasReports() === false)
-        {
-            $report = $this->script->addDefaultReport();
-        }
+		foreach ($reportsWriters as $report => $writers)
+		{
+			$report = $container->getDefinition($report);
 
-        $reports = $this->script->getReports();
-
-        foreach ($reportsWriters as $report => $writers)
-        {
-            if ($report === 'default')
-            {
-                $report = $reports[0];
-            }
-            else
-            {
-                $report = $container->get($report);
-            }
-
-            foreach ($writers as $writer)
-            {
-                $report->addWriter($container->get($writer));
-            }
-        }
-    }
+			foreach ($writers as $writer)
+			{
+				$report->addMethodCall('addWriter', array($container->getDefinition($writer)));
+			}
+		}
+	}
 }

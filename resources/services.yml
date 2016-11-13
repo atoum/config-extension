@@ -17,16 +17,19 @@ services:
     field.coverage.html:
         class: mageekguy\atoum\report\fields\runner\coverage\html
         arguments:
-            - %project.name%
-            - %coverage.html.directory%
+            - "%project.name%"
+            - "%coverage.html.directory%"
         calls:
-            - [setRootUrl, [%coverage.html.directory%/index.html]]
+            - [setRootUrl, ["%coverage.html.directory%/index.html"]]
 
     field.logo:
         class: mageekguy\atoum\report\fields\runner\atoum\logo
 
     field.logo.result:
         class: mageekguy\atoum\report\fields\runner\result\logo
+
+    report.default:
+        class: mageekguy\atoum\reports\realtime\cli
 
     report.coverage.clover:
         class: mageekguy\atoum\reports\asynchronous\clover
@@ -61,11 +64,11 @@ services:
     writer.mailer:
         class: mageekguy\atoum\mailers\mail
         calls:
-            - [addTo, [%mailer.to%]]
-            - [setFrom, [%mailer.from%]]
-            - [setXMailer, [%mailer.xmailer%]]
-            - [setReplyTo, [%mailer.reply_to%]]
-            - [setContentType, [%mailer.content_type%, %mailer.content_encoding%]]
+            - [addTo, ["%mailer.to%"]]
+            - [setFrom, ["%mailer.from%"]]
+            - [setXMailer, ["%mailer.xmailer%"]]
+            - [setReplyTo, ["%mailer.reply_to%"]]
+            - [setContentType, ["%mailer.content_type%", "%mailer.content_encoding%"]]
 
     writer.stdout:
         class: mageekguy\atoum\writers\std\out
@@ -73,9 +76,9 @@ services:
     writer.clover:
         class: mageekguy\atoum\writers\file
         arguments:
-            - %coverage.clover.filename%
+            - "%coverage.clover.filename%"
 
     writer.xunit:
         class: mageekguy\atoum\writers\file
         arguments:
-            - %xunit.filename%
+            - "%xunit.filename%"
