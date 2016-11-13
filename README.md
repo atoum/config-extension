@@ -50,13 +50,13 @@ atoum:
         - ./tests/units/classes
 
     fields:
-        default:
+        report.default:
             - field.logo
             - field.logo.result
             - field.coverage
 
     reports:
-        - default
+        - report.default
         - report.coverage.clover
 ```
 
@@ -114,13 +114,13 @@ Example:
 ```yaml
 atoum:
     reports:
-        - default
+        - report.default
         - report.coverage.clover
 ```
 
 Possible values :
 
-#### default
+#### report.default
 
 adds atoum's default reporter (when the reports key is defined, atoum's default reporter is no longer used).
 
@@ -165,10 +165,10 @@ This example adds the logo field to the default report :
 ```yaml
 atoum:
     reports:
-        - default
+        - report.default
 
     fields:
-        default:
+        report.default:
             - field.logo
 ```
 

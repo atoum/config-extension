@@ -6,9 +6,9 @@ use mageekguy\atoum;
 
 class configuration
 {
-    public function applyTo(atoum\scripts\runner $script)
-    {
-        $container = new atoum\config\container();
-        $container->build($script);
-    }
+	public function applyTo(atoum\scripts\runner $script)
+	{
+		$container = new atoum\config\container();
+		$container->build($script);
+	}
 } 

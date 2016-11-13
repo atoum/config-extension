@@ -1,12 +1,9 @@
 atoum:
-    directories:
-        - ./tests/units/classes
-
     reports:
-        - default
+        - report.default
         - report.xunit
         - report.coverage.clover
 
     fields:
-        default:
+        report.default:
             - field.logo

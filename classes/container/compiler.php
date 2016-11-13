@@ -7,10 +7,10 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 abstract class compiler implements CompilerPassInterface
 {
-    protected $script;
+	protected $script;
 
-    public function __construct(atoum\scripts\runner $script)
-    {
-        $this->script = $script;
-    }
+	public function __construct(atoum\scripts\runner $script)
+	{
+		$this->script = $script;
+	}
 } 
