@@ -12,11 +12,12 @@
         }
     ],
     "require": {
-        "atoum/atoum": ">=1.0.0 <7.0",
+        "atoum/atoum": "^2.9",
         "symfony/yaml": "~2.6",
         "symfony/config": "~2.6",
         "symfony/dependency-injection": "~2.6"
     },
+    "minimum-stability": "beta",
     "autoload": {
         "psr-4": {
             "mageekguy\\atoum\\config\\": "classes"

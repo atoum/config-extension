@@ -35,3 +35,8 @@ foreach ($components as $componentKey => $componentName) {
 	;
 }
 
+if (defined('mageekguy\atoum\scripts\runner') === true) {
+	\mageekguy\atoum\scripts\runner::addConfigurationCallable(function($script, $runner) {
+		$runner->addExtension(new \mageekguy\atoum\config\extension($script));
+	});
+}
