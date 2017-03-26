@@ -13,7 +13,7 @@
     ],
     "minimum-stability": "beta",
     "require": {
-        "atoum/atoum": "^2.9",
+        "atoum/atoum": "^2.9|^3.0",
         "symfony/yaml": "^2.6 || ^3.0",
         "symfony/config": "^2.6 || ^3.0",
         "symfony/dependency-injection": "^2.6 || ^3.0"
