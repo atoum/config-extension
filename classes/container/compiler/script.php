@@ -12,6 +12,7 @@ class script extends atoum\config\container\compiler
 	{
 		$scriptDefinition = new Definition(get_class($this->script));
 		$scriptDefinition->setFactory(array($this, 'getScript'));
+		$scriptDefinition->setPublic(true);
 
 		$container->setDefinition('script', $scriptDefinition);
 	}

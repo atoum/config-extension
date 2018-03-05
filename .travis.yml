@@ -6,9 +6,9 @@ php:
   - 5.5
   - 5.6
   - 7.0
+  - 7.1
+  - 7.2
   - nightly
-  - hhvm
-  - hhvm-nightly
 
 cache:
   directories:
@@ -17,8 +17,6 @@ cache:
 matrix:
   allow_failures:
     - php: nightly
-    - php: hhvm
-    - php: hhvm-nightly
 
 env:
   matrix:
