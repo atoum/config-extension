@@ -11,11 +11,11 @@ class definition implements ConfigurationInterface
 	
 	public function getConfigTreeBuilder()
 	{
-		if (method_exists($tree, 'getRootNode')) { // conpatibility with symfony config 4.2+
+		if (method_exists(TreeBuilder::class, '__construct')) { // conpatibility with symfony config 4.2+
 			$tree = new TreeBuilder(self::ROOT_NODE_NAME);
 			$root = $tree->getRootNode();
 		} else {
-			// remove this `else` when symfony config requirements is 4.2+
+			// TODO remove this `else` when symfony config requirements is 4.2+
 			$tree = new TreeBuilder();
 			$root = $tree->root(self::ROOT_NODE_NAME);
 		}		
