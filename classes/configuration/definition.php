@@ -7,10 +7,18 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class definition implements ConfigurationInterface
 {
+	const ROOT_NODE_NAME = 'atoum';
+	
 	public function getConfigTreeBuilder()
 	{
-		$tree = new TreeBuilder();
-		$root = $tree->root('atoum');
+		if (method_exists($tree, 'getRootNode')) { // conpatibility with symfony config 4.2+
+			$tree = new TreeBuilder(self::ROOT_NODE_NAME);
+			$root = $tree->getRootNode();
+		} else {
+			// remove this `else` when symfony config requirements is 4.2+
+			$tree = new TreeBuilder();
+			$root = $tree->root(self::ROOT_NODE_NAME);
+		}		
 
 		$root
 			->children()
